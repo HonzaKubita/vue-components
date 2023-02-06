@@ -10,7 +10,9 @@
       @input="validateDoubleSlider('min')"
     >
 
-    <div class="double-slider-infill" :style="{ width: ((max - min) / props.max * 100)  + '%', left: (min / props.max) * 100 + '%'}"></div>
+    <div class="double-slider-infill-container">
+      <div class="double-slider-infill" :style="{ width: ((max - min) / props.max * 100)  + '%', left: (min / props.max) * 100 + '%'}"></div>
+    </div>
 
     <input 
       type="range" 
@@ -81,7 +83,7 @@ function validateDoubleSlider(side) {
   height: 15px;
   width: 15px;
   border-radius: 50%;
-  background: black; /* Thumb color */
+  background: black;
   cursor: pointer;
   margin-top: -5px;
   position: relative;
@@ -90,15 +92,26 @@ function validateDoubleSlider(side) {
 .double-slider::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
-  background: #e8e8e8; /* Slider track color */
+  background: #e8e8e8;
   border-radius: 3px;
   border: none;
+}
+
+.double-slider-infill-container {
+  width: calc(100% - 15px);
+  height: 100%;
+
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .double-slider-infill {
   position: absolute;
   height: 5px;
-  background-color: gray; /* Infill color */
+  background-color: gray;
   z-index: 1;
 }
 
