@@ -9,6 +9,9 @@
       v-model.number="min"
       @input="validateDoubleSlider('min')"
     >
+
+    <div class="double-slider-infill" :style="{ width: ((max - min) / props.max * 100)  + '%', left: (min / props.max) * 100 + '%'}"></div>
+
     <input 
       type="range" 
       class="double-slider double-slider-right" 
@@ -60,6 +63,7 @@ function validateDoubleSlider(side) {
 }
 
 .double-slider {
+  width: 100%;
   -webkit-appearance: none;
   background: transparent; 
   position: absolute;
@@ -77,18 +81,25 @@ function validateDoubleSlider(side) {
   height: 15px;
   width: 15px;
   border-radius: 50%;
-  background: black;
+  background: black; /* Thumb color */
   cursor: pointer;
   margin-top: -5px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .double-slider::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
-  background: #e8e8e8;
+  background: #e8e8e8; /* Slider track color */
   border-radius: 3px;
   border: none;
+}
+
+.double-slider-infill {
+  position: absolute;
+  height: 5px;
+  background-color: gray; /* Infill color */
+  z-index: 1;
 }
 
 </style>
