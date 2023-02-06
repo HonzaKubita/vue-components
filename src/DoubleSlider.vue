@@ -2,7 +2,7 @@
   <div class="double-sliders">
     <input 
       type="range" 
-      class="double-slider" 
+      class="double-slider double-slider-left" 
       :min="props.min" 
       :max="props.max" 
       :step="props.step"
@@ -11,7 +11,7 @@
     >
     <input 
       type="range" 
-      class="double-slider" 
+      class="double-slider double-slider-right" 
       :min="props.min" 
       :max="props.max"
       :step="props.step" 
@@ -23,7 +23,7 @@
 
 <script setup>
 
-const props = defineProps(["modelValue", "max", "min", "step"]);
+const props = defineProps(["modelValue", "max", "min", "step", "space"]);
 const emit = defineEmits(["update:modelValue"]);
 
 const min = ref(props.modelValue.min);
@@ -50,11 +50,12 @@ function validateDoubleSlider(side) {
 .double-sliders {
   width: 90%;
 
-  position: relative;
-}
+  padding: 20px;
 
-.double-slider {
-  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: relative;
 }
 
@@ -62,7 +63,13 @@ function validateDoubleSlider(side) {
   -webkit-appearance: none;
   background: transparent; 
   position: absolute;
-  left: 0;
+}
+
+.double-slider-left::-webkit-slider-thumb {
+  transform: translateX(-7.5px);
+}
+.double-slider-right::-webkit-slider-thumb {
+  transform: translateX(7.5px);
 }
 
 .double-slider::-webkit-slider-thumb {
@@ -76,7 +83,6 @@ function validateDoubleSlider(side) {
   position: relative;
   z-index: 1;
 }
-
 .double-slider::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
